@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="bootstrap/jquery.min.js"></script>
+    <script src="imageMapReseizer/imageMapResizer.min.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
+
+    <title>Sait</title>
+  </head>
+
+  <body>
+    <div class="container imgbox">
+      <img
+        src="images/SAIT_Videos.png"
+        class="img-fluid center-fit"
+        width="100%"
+        alt="sait"
+        usemap="#saitmap"
+      />
+      <map name="saitmap">
+        <area
+          shape="circle"
+          coords="567,320,36"
+          alt="Load_bearing_walls"
+          href="#"
+        />
+        <area
+          shape="circle"
+          coords="827,320,36"
+          alt="Thermal_solar_heater"
+          href="#"
+        />
+
+        <area
+          shape="circle"
+          coords="1140,320,36"
+          alt="Chemical_filtration_of_rainwater"
+          href="#"
+        />
+
+        <area
+          shape="circle"
+          coords="1445,320,36"
+          alt="Solar_voltaic_panels"
+          href="#"
+        />
+        <area
+          shape="circle"
+          coords="1735,320,36"
+          alt="Container_homes"
+          href="#"
+        />
+        <!-- Lower part of image-->
+        <area
+          shape="circle"
+          coords="460,1358,36"
+          alt="Electric_vehicle_charging_station"
+          href="#"
+        />
+        <area
+          shape="circle"
+          coords="746,1358,36"
+          alt="Thermal_insulating_walls"
+          href="#"
+        />
+
+        <area
+          shape="circle"
+          coords="1041,1358,36"
+          alt="Domestic_power_generation"
+          href="#"
+        />
+
+        <area
+          shape="circle"
+          coords="1371,1358,36"
+          alt="Testing_electric_loads"
+          href="#"
+        />
+        <area
+          shape="circle"
+          coords="1616,1358,36"
+          alt="Biofiltration_of_rainwater"
+          href="#"
+        />
+      </map>
+    </div>
+
+    <!-- Modal -->
+    <div id="previewModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+            <h4 class="modal-title">Modal Header</h4>
+          </div>
+          <div class="modal-body">
+            <div class="embed-responsive embed-responsive-16by9">
+              <video
+                width="640"
+                height="480"
+                class="embed-responsive-item"
+                controls
+              >
+                <source src="" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function() {
+        $("map").imageMapResize();
+
+        $("area").on("click", function(e) {
+          e.preventDefault();
+          let alt = $(this).attr("alt");
+
+          let newSource = "videos/" + alt + ".mp4";
+
+          $("source").attr("src", newSource);
+          $("video")[0].load();
+          alt = alt.replace(/\_/g, " ");
+          $(".modal-title").text(alt);
+          $("#previewModal").modal("show");
+
+          $("video")[0].play();
+        });
+        $("#previewModal").on("hidden.bs.modal", function() {
+          $("video")[0].pause();
+        });
+      });
+    </script>
+  </body>
+</html>
